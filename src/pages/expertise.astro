@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const domains = [
+  {
+    title: 'Back-end Java / Quarkus 3',
+    text: 'Conception d’API et de services performants, cloud-native et faciles à exploiter.',
+    tags: ['Java', 'Quarkus 3', 'REST', 'Hibernate / Panache', 'Tests'],
+  },
+  {
+    title: 'Front-end Angular',
+    text: 'Applications web structurées, typées et maintenables, pensées pour durer.',
+    tags: ['Angular', 'TypeScript', 'RxJS', 'Accessibilité'],
+  },
+  {
+    title: 'Architecture hexagonale & DDD',
+    text: 'Un domaine métier au centre, isolé de l’infrastructure : du code lisible, testable et évolutif.',
+    tags: ['Hexagonal', 'DDD', 'Clean code', 'Event storming'],
+  },
+];
+
+const leadership = [
+  {
+    title: 'Encadrement d’équipes',
+    text: 'Animation et montée en compétences d’équipes jusqu’à 8 développeurs : revues de code, pair programming, bonnes pratiques.',
+  },
+  {
+    title: 'Référent technique',
+    text: 'Référent technique sur un plateau de 20 à 30 développeurs : choix d’architecture, standards communs, arbitrages techniques.',
+  },
+  {
+    title: 'Scrum Master',
+    text: 'Facilitation des cérémonies agiles, amélioration continue et fluidité de la collaboration avec le métier.',
+  },
+];
+---
+
+<BaseLayout
+  title="Expertise"
+  description="Java / Quarkus 3, Angular, architecture hexagonale & DDD, encadrement d’équipes jusqu’à 8 devs, référent technique et Scrum Master."
+>
+  <header class="page-header">
+    <span class="eyebrow">Expertise</span>
+    <h1>Technique et leadership</h1>
+    <p>Un profil full stack orienté architecture, avec l’expérience de l’encadrement et de la coordination d’équipes.</p>
+  </header>
+
+  <section class="section" aria-labelledby="tech-title">
+    <h2 id="tech-title">Domaines techniques</h2>
+    <div class="grid">
+      {
+        domains.map((d) => (
+          <article class="card">
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+            <ul class="tags" aria-label="Technologies">
+              {d.tags.map((t) => <li>{t}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="lead-title">
+    <h2 id="lead-title">Leadership & organisation</h2>
+    <div class="grid">
+      {
+        leadership.map((d) => (
+          <article class="card">
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="actions">
+    <a class="button" href="/experiences/">Voir mes expériences</a>
+    <a class="button button--ghost" href="/contact/">Discuter d’une mission</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .tags { margin-top: var(--space-4); }
+</style>

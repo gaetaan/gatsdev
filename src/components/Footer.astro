@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {year} {site.owner} — {site.brand}</p>
+    <ul>
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.linkedin} rel="me noopener">LinkedIn</a></li>
+      <li><a href="/mentions-legales/">Mentions légales</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-8);
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    padding: 0;
+    list-style: none;
+  }
+  a { color: var(--text-muted); }
+  a:hover { color: var(--accent-strong); }
+</style>

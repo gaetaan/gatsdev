@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { legal, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Mentions légales"
+  description="Mentions légales et politique de données personnelles du site gatsdev.fr."
+>
+  <div class="prose">
+    <header class="page-header">
+      <span class="eyebrow">Informations légales</span>
+      <h1>Mentions légales</h1>
+      <p>Dernière mise à jour : {legal.updatedAt}</p>
+    </header>
+
+    <h2>Éditeur du site</h2>
+    <p>
+      Le site <strong>{site.domain}</strong> est édité par&nbsp;:<br />
+      <strong>{site.owner} EI</strong> ({site.brand})<br />
+      Statut : {legal.status}<br />
+      SIREN : {legal.siren}<br />
+      Adresse : {legal.address}<br />
+      Email : <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <p>Directeur de la publication : {legal.publicationDirector}.</p>
+
+    <h2>Hébergement</h2>
+    <p>
+      Le site est hébergé par <strong>{legal.host.name}</strong> ({legal.host.service}),<br />
+      {legal.host.address}<br />
+      <a href={legal.host.url}>{legal.host.url.replace('https://', '')}</a>
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L’ensemble des contenus de ce site (textes, éléments graphiques, logo) est la propriété de {site.owner},
+      sauf mention contraire. Toute reproduction sans autorisation préalable est interdite.
+    </p>
+
+    <h2>Données personnelles</h2>
+    <p>
+      Ce site ne comporte <strong>aucun formulaire</strong>, ne dépose <strong>aucun cookie</strong> et n’utilise
+      <strong>aucun outil de mesure d’audience, de suivi ou de publicité</strong>. Aucune donnée personnelle n’est
+      collectée par le site lui-même.
+    </p>
+    <ul>
+      <li>
+        <strong>Préférence d’affichage :</strong> si vous choisissez le thème clair ou sombre, ce choix est enregistré
+        uniquement dans votre navigateur (stockage local). Il n’est jamais transmis et vous pouvez l’effacer à tout
+        moment depuis les réglages de votre navigateur.
+      </li>
+      <li>
+        <strong>Journaux techniques :</strong> comme tout hébergeur, {legal.host.name} peut enregistrer des données
+        techniques de connexion (adresse IP, date, page demandée) à des fins de sécurité et de fonctionnement du
+        service, conformément à sa propre politique de confidentialité.
+      </li>
+      <li>
+        <strong>Échanges par email :</strong> si vous me contactez par email, les informations que vous transmettez sont
+        utilisées uniquement pour répondre à votre demande et assurer le suivi de notre relation professionnelle.
+        Elles ne sont ni cédées ni revendues, et sont conservées au maximum trois ans après notre dernier échange.
+      </li>
+    </ul>
+    <p>
+      Conformément au Règlement général sur la protection des données (RGPD) et à la loi « Informatique et
+      Libertés », vous disposez d’un droit d’accès, de rectification, d’effacement, d’opposition et de limitation du
+      traitement de vos données. Pour l’exercer, écrivez à <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez
+      également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).
+    </p>
+
+    <h2>Liens externes</h2>
+    <p>
+      Ce site contient des liens vers des sites tiers (par exemple LinkedIn). Leur consultation est soumise aux
+      conditions et politiques de confidentialité de ces sites.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Contactez Gaëtan Barbaria, lead tech full stack freelance à Aix-Marseille, disponible à partir de ${site.availability}.`}
+>
+  <header class="page-header">
+    <span class="eyebrow">Contact</span>
+    <h1>Parlons de votre projet</h1>
+    <p>
+      Disponible pour de nouvelles missions à partir de {site.availability}, sur Aix-Marseille ou à distance.
+    </p>
+  </header>
+
+  <div class="grid contact-grid">
+    <article class="card">
+      <h2>Email</h2>
+      <p>Le moyen le plus simple pour me présenter votre besoin.</p>
+      <p class="contact-value"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </article>
+
+    <article class="card">
+      <h2>LinkedIn</h2>
+      <p>Pour suivre mon parcours ou échanger directement.</p>
+      <p class="contact-value">
+        <a href={site.linkedin} rel="me noopener">Voir mon profil LinkedIn<span class="visually-hidden"> (site externe)</span></a>
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Dossier de compétences</h2>
+      <p>Le détail de mes missions, compétences et références.</p>
+      <p class="contact-value">
+        <a class="button" href={site.resumePdf} download>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path>
+          </svg>
+          Télécharger (PDF)
+        </a>
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-grid h2 { font-size: 1.2rem; margin-bottom: var(--space-2); }
+  .contact-value { margin-top: var(--space-4); font-weight: 600; overflow-wrap: anywhere; }
+</style>

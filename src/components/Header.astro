@@ -1,0 +1,89 @@
+---
+import { nav, site } from '../data/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+const normalize = (p: string) => (p.endsWith('/') ? p : `${p}/`);
+const current = normalize(Astro.url.pathname);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${site.brand} — accueil`}>
+      <span class="brand-mark" aria-hidden="true">G</span>
+      <span>{site.brand}</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={normalize(item.href) === current ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    padding-block: var(--space-4);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: auto;
+    font-weight: 750;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .brand:hover { color: var(--text); }
+  .brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-size: 1rem;
+  }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+  nav a {
+    display: inline-block;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-weight: 550;
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--text); background: var(--accent-soft); }
+  nav a[aria-current='page'] { color: var(--accent-strong); background: var(--accent-soft); }
+
+  /* Mobile : la navigation passe sous la marque, sur toute la largeur. */
+  @media (max-width: 40rem) {
+    nav { order: 3; width: 100%; margin-inline: -0.45rem; }
+    nav ul { gap: 0; }
+    nav a { padding: 0.4rem 0.45rem; font-size: 0.95rem; }
+  }
+</style>

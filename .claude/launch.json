@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gatsdev-preview",
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "preview", "--port", "4321"],
+      "port": 4321
+    }
+  ]
+}

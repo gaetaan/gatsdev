@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.brand,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  areaServed: 'Aix-Marseille, France',
+  founder: {
+    '@type': 'Person',
+    name: site.owner,
+    jobTitle: site.role,
+    sameAs: [site.linkedin],
+  },
+};
+---
+
+<BaseLayout>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="availability">
+      <span class="dot" aria-hidden="true"></span>
+      Disponible à partir de {site.availability}
+    </p>
+    <h1 id="hero-title">{site.owner}</h1>
+    <p class="hero-role">{site.role} · {site.location}</p>
+    <p class="hero-pitch">
+      J’aide les équipes à concevoir et livrer des applications métier robustes&nbsp;: une architecture
+      claire, un code maintenable et des développeurs qui progressent ensemble.
+    </p>
+    <div class="actions">
+      <a class="button" href="/contact/">Me contacter</a>
+      <a class="button button--ghost" href="/expertise/">Voir mon expertise</a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="apport-title">
+    <h2 id="apport-title">Ce que j’apporte</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Développement full stack</h3>
+        <p>Back-end Java / Quarkus 3 et front-end Angular, de la conception à la mise en production.</p>
+      </article>
+      <article class="card">
+        <h3>Architecture logicielle</h3>
+        <p>Architecture hexagonale et DDD pour des systèmes lisibles, testables et faciles à faire évoluer.</p>
+      </article>
+      <article class="card">
+        <h3>Leadership technique</h3>
+        <p>Encadrement d’équipes jusqu’à 8 développeurs, référent technique sur un plateau de 20 à 30 devs, Scrum Master.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { max-width: 46rem; padding-block: var(--space-8) var(--space-4); }
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    border-radius: 999px;
+  }
+  .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: light-dark(#1a7f37, #4ac26b);
+  }
+  .hero-role {
+    margin-top: var(--space-3);
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .hero-pitch { margin-top: var(--space-6); font-size: 1.15rem; }
+</style>
