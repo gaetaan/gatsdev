@@ -5,34 +5,54 @@ import { site } from '../data/site';
 ---
 
 <BaseLayout
-  title="Expériences"
-  description="Sélection de missions de Gaëtan Barbaria, lead tech full stack freelance : contexte, réalisations et technologies."
+  title="Expériences et missions"
+  description="Missions de Gaëtan Barbaria depuis 2020 : refontes vers des microservices DDD / hexagonaux, chat national, migration WebLogic vers Quarkus, encadrement d’équipes."
 >
   <header class="page-header">
-    <span class="eyebrow">Expériences</span>
-    <h1>Quelques missions</h1>
-    <p>Une sélection de missions représentatives. Le détail complet figure dans mon dossier de compétences.</p>
+    <h1>Expériences</h1>
+    <p class="lede">
+      Six missions depuis 2020, toutes sur des applications métier nationales, de développeur unique à leader technique
+      d’une équipe de 8&nbsp;personnes.
+      {
+        site.showDocuments ? (
+          <>
+            Le détail complet figure dans le <a href={site.resumePdf} download>dossier de compétences (PDF)</a>.
+          </>
+        ) : (
+          <>
+            Mon dossier de compétences détaillé est disponible <a href="/contact/">sur demande</a>.
+          </>
+        )
+      }
+    </p>
   </header>
 
-  <ol class="timeline">
+  <ol class="rows timeline">
     {
       experiences.map((xp) => (
-        <li>
-          <article class="card xp">
-            <header>
-              <p class="xp-period">{xp.period}</p>
-              <h2>{xp.role}</h2>
-              <p class="xp-client">{xp.client}</p>
-            </header>
+        <li class="row" id={xp.id}>
+          <p class="row-label">
+            <time datetime={xp.start}>{xp.period}</time>
+          </p>
+          <article class="row-body" aria-labelledby={`${xp.id}-title`}>
+            <h2 id={`${xp.id}-title`}>Projet {xp.project}</h2>
+            <p class="xp-meta">
+              {xp.role}
+              <br />
+              <span class="muted">
+                {xp.company}, client {xp.client}
+              </span>
+            </p>
             <p>{xp.summary}</p>
-            {xp.highlights.length > 0 && (
-              <ul>
-                {xp.highlights.map((h) => <li>{h}</li>)}
-              </ul>
-            )}
-            <ul class="tags" aria-label="Technologies et méthodes">
-              {xp.stack.map((t) => <li>{t}</li>)}
+            <ul>
+              {xp.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
             </ul>
+            <p class="xp-stack">
+              <span class="visually-hidden">Environnement technique&#8239;: </span>
+              <span translate="no">{xp.stack.join(', ')}</span>
+            </p>
           </article>
         </li>
       ))
@@ -40,28 +60,29 @@ import { site } from '../data/site';
   </ol>
 
   <div class="actions">
-    <a class="button" href={site.resumePdf} download>Télécharger le dossier de compétences (PDF)</a>
-    <a class="button button--ghost" href="/contact/">Me contacter</a>
+    {
+      site.showDocuments && (
+        <a class="button" href={site.resumePdf} download>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+          </svg>
+          Dossier de compétences (PDF)
+        </a>
+      )
+    }
+    <a class={site.showDocuments ? 'button button--ghost' : 'button'} href="/contact/">Me contacter</a>
   </div>
 </BaseLayout>
 
 <style>
-  .timeline {
-    display: grid;
-    gap: var(--space-6);
-    padding: 0;
-    list-style: none;
-    max-width: 50rem;
+  .timeline > .row { padding-block: var(--space-8); }
+  .timeline > .row:first-child { padding-top: 0; }
+  .timeline h2 { font-size: 1.45rem; }
+  .xp-meta { font-weight: 500; }
+  .xp-stack {
+    padding-top: var(--space-3);
+    font-size: var(--t-small);
+    color: var(--ardoise);
   }
-  .xp h2 { font-size: 1.3rem; }
-  .xp header { margin-bottom: var(--space-3); }
-  .xp-period {
-    font-size: 0.9rem;
-    font-weight: 600;
-    font-family: var(--font-mono);
-    color: var(--accent);
-  }
-  .xp-client { margin-top: var(--space-1); font-weight: 550; }
-  .xp .tags { margin-top: var(--space-4); }
-  .xp > ul:not(.tags) { margin-top: var(--space-3); padding-left: 1.1rem; color: var(--text-muted); }
+  .actions { margin-top: var(--space-12); }
 </style>

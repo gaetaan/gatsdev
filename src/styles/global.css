@@ -1,29 +1,46 @@
 /* ==========================================================================
    Gats Dev — styles globaux
-   Thème clair/sombre via `color-scheme` + `light-dark()` :
-   - par défaut, suit la préférence système (fonctionne sans JavaScript) ;
-   - le bouton de l'en-tête force `data-theme="light|dark"` sur <html>.
+
+   Palette (6 valeurs nommées, déclinées clair / sombre) :
+     papier  fond          encre   texte principal
+     ardoise texte second. filet   séparateurs
+     cobalt  liens, accent feuille disponibilité
+
+   Typographie : une seule famille, IBM Plex Sans (variable), échelle 1,25.
+   Mise en page : alignée à gauche, structurée par des filets horizontaux
+   (chaque filet ouvre une rubrique) plutôt que par des cartes.
+
+   Thème : `color-scheme` + `light-dark()` ; suit le système par défaut,
+   le bouton de l'en-tête force `data-theme="light|dark"` sur <html>.
    ========================================================================== */
 
 :root {
   color-scheme: light dark;
 
-  --bg: light-dark(#fbfbfa, #111418);
-  --bg-elevated: light-dark(#ffffff, #181c22);
-  --text: light-dark(#1b1f24, #e7e9ec);
-  --text-muted: light-dark(#4f5866, #a6aeb9);
-  --border: light-dark(#e3e5e8, #2a3039);
-  --accent: light-dark(#0b5cad, #7ab8ff);
-  --accent-strong: light-dark(#084886, #a5cfff);
-  --accent-contrast: light-dark(#ffffff, #0b1320);
-  --accent-soft: light-dark(#e8f1fb, #16263a);
-  --focus: light-dark(#0b5cad, #a5cfff);
+  --papier: light-dark(#fbfcfd, #0f1a2a);
+  --surface: light-dark(#f1f4f8, #152338);
+  --encre: light-dark(#14233a, #e6ecf3);
+  --ardoise: light-dark(#4b5b70, #a5b3c5);
+  --filet: light-dark(#d8dee6, #2a3a52);
+  --cobalt: light-dark(#1b5fa8, #8ebef5);
+  --cobalt-fonce: light-dark(#0f4682, #b9d6f8);
+  --cobalt-voile: light-dark(#e6eef8, #1a2d47);
+  --sur-cobalt: light-dark(#ffffff, #0f1a2a);
+  --feuille: light-dark(#1f7a3a, #5cc27a);
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font: 'IBM Plex Sans Variable', 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
-  --radius: 10px;
-  --container: 68rem;
+  /* Échelle typographique 1,25 (tierce majeure) sur une base de 17 px. */
+  --t-small: 0.875rem;
+  --t-base: 1.0625rem;
+  --t-h3: 1.25rem;
+  --t-h2: clamp(1.5rem, 1.3rem + 0.8vw, 1.95rem);
+  --t-h1: clamp(2.35rem, 1.6rem + 3.2vw, 3.8rem);
+
+  --radius: 6px;
+  --container: 72rem;
+  --measure: 40rem;
+  --gutter: max(1.5rem, env(safe-area-inset-left), env(safe-area-inset-right));
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -32,6 +49,7 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-24: 6rem;
 }
 
 :root[data-theme='light'] { color-scheme: light; }
@@ -45,40 +63,53 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: var(--space-8);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: var(--font);
+  font-size: var(--t-base);
   line-height: 1.65;
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
 }
 
 img, svg { display: block; max-width: 100%; }
 
-h1, h2, h3 { line-height: 1.2; letter-spacing: -0.015em; text-wrap: balance; }
-h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem); font-weight: 750; }
-h2 { font-size: clamp(1.4rem, 1.15rem + 1vw, 1.8rem); font-weight: 700; }
-h3 { font-size: 1.15rem; font-weight: 650; }
-p { text-wrap: pretty; }
+h1, h2, h3 {
+  line-height: 1.15;
+  font-weight: 600;
+  text-wrap: balance;
+}
+h1 { font-size: var(--t-h1); letter-spacing: -0.03em; }
+h2 { font-size: var(--t-h2); letter-spacing: -0.02em; }
+h3 { font-size: var(--t-h3); letter-spacing: -0.01em; line-height: 1.3; }
+p, li, dd { text-wrap: pretty; }
 
-a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-a:hover { color: var(--accent-strong); text-decoration-thickness: 2px; }
+a {
+  color: var(--cobalt);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.15s ease, text-decoration-thickness 0.15s ease;
+}
+a:hover { color: var(--cobalt-fonce); text-decoration-thickness: 2px; }
 
 :focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--cobalt);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
@@ -89,7 +120,7 @@ a:hover { color: var(--accent-strong); text-decoration-thickness: 2px; }
   width: 100%;
   max-width: var(--container);
   margin-inline: auto;
-  padding-inline: var(--space-6);
+  padding-inline: var(--gutter);
 }
 
 .visually-hidden {
@@ -106,75 +137,57 @@ a:hover { color: var(--accent-strong); text-decoration-thickness: 2px; }
   top: -100px;
   z-index: 100;
   padding: var(--space-2) var(--space-4);
-  background: var(--accent);
-  color: var(--accent-contrast);
+  background: var(--cobalt);
+  color: var(--sur-cobalt);
   border-radius: var(--radius);
   font-weight: 600;
 }
-.skip-link:focus { top: var(--space-4); color: var(--accent-contrast); }
+.skip-link:focus { top: var(--space-4); color: var(--sur-cobalt); }
 
-.muted { color: var(--text-muted); }
+.muted { color: var(--ardoise); }
 
 /* --- Mise en page ------------------------------------------------------ */
-main { flex: 1; padding-block: var(--space-12) var(--space-16); }
+main { flex: 1; padding-block: var(--space-12) var(--space-24); }
 main:focus { outline: none; }
 
-.page-header { margin-bottom: var(--space-12); max-width: 46rem; }
-.page-header p { margin-top: var(--space-4); font-size: 1.15rem; color: var(--text-muted); }
+.page-header { max-width: var(--measure); margin-bottom: var(--space-16); }
+.page-header .lede { margin-top: var(--space-6); }
 
-.eyebrow {
-  display: inline-block;
-  margin-bottom: var(--space-3);
-  font-size: 0.85rem;
-  font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
+.lede { font-size: 1.2rem; line-height: 1.6; color: var(--ardoise); }
+
+/* Une rubrique = un filet épais + un titre. */
+.section { margin-top: var(--space-24); }
+.section-title {
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--encre);
+  margin-bottom: var(--space-8);
 }
 
-* + .section { margin-top: var(--space-16); }
-.section > h2 { margin-bottom: var(--space-6); }
+/* Lignes « libellé | contenu » séparées par des filets fins. */
+.rows { padding: 0; list-style: none; }
+.row {
+  display: grid;
+  gap: var(--space-2) var(--space-8);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--filet);
+}
+.row:first-child { border-top: 0; padding-top: 0; }
+.row-label { color: var(--ardoise); font-weight: 500; }
+.row-body { max-width: var(--measure); }
+.row-body > * + * { margin-top: var(--space-3); }
+.row-body ul { padding-left: 1.1rem; }
+.row-body li + li { margin-top: var(--space-2); }
+.row-body li::marker { color: var(--ardoise); }
 
-.prose { max-width: 46rem; }
+@media (min-width: 48rem) {
+  .row { grid-template-columns: 14rem minmax(0, 1fr); }
+}
+
+.prose { max-width: var(--measure); }
 .prose > * + * { margin-top: var(--space-4); }
-.prose h2 { margin-top: var(--space-12); }
-.prose h3 { margin-top: var(--space-8); }
+.prose h2 { margin-top: var(--space-12); font-size: 1.45rem; }
 .prose ul { padding-left: 1.25rem; }
 .prose li + li { margin-top: var(--space-2); }
-
-/* --- Cartes & grilles -------------------------------------------------- */
-.grid {
-  display: grid;
-  gap: var(--space-6);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-}
-
-.card {
-  padding: var(--space-6);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.card h3 { margin-bottom: var(--space-2); }
-.card p { color: var(--text-muted); }
-.card ul:not(.tags) { margin-top: var(--space-3); padding-left: 1.1rem; color: var(--text-muted); }
-.card li + li { margin-top: var(--space-1); }
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  padding: 0;
-  list-style: none;
-}
-.tags li {
-  padding: 0.15rem 0.6rem;
-  font-size: 0.85rem;
-  font-family: var(--font-mono);
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  border-radius: 999px;
-}
 
 /* --- Boutons ----------------------------------------------------------- */
 .actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
@@ -190,15 +203,57 @@ main:focus { outline: none; }
   line-height: 1.2;
   text-decoration: none;
   border-radius: var(--radius);
-  border: 1px solid var(--accent);
-  background: var(--accent);
-  color: var(--accent-contrast);
+  border: 1px solid var(--cobalt);
+  background: var(--cobalt);
+  color: var(--sur-cobalt);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.button:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: var(--accent-contrast); }
-
-.button--ghost { background: transparent; color: var(--accent); }
-.button--ghost:hover { background: var(--accent-soft); color: var(--accent-strong); }
-
+.button:hover {
+  background: var(--cobalt-fonce);
+  border-color: var(--cobalt-fonce);
+  color: var(--sur-cobalt);
+}
+.button--ghost { background: transparent; color: var(--cobalt); }
+.button--ghost:hover { background: var(--cobalt-voile); color: var(--cobalt-fonce); }
 .button svg { width: 1.1em; height: 1.1em; flex: none; }
+
+/* Pastille de disponibilité : le texte porte l'information, la couleur l'accompagne. */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+}
+.availability::before {
+  content: '';
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--feuille);
+  box-shadow: 0 0 0 3px light-dark(#1f7a3a26, #5cc27a33);
+}
+
+/* --- Mobile ------------------------------------------------------------
+   Rythme vertical resserré, texte d'introduction plus compact,
+   boutons pleine largeur faciles à atteindre au pouce. */
+@media (max-width: 40rem) {
+  :root {
+    --space-24: 4rem;
+    --space-16: 2.75rem;
+    --space-12: 2.25rem;
+  }
+  main { padding-block: var(--space-8) var(--space-16); }
+  h1 { letter-spacing: -0.025em; }
+  .lede { font-size: 1.1rem; line-height: 1.6; }
+  .page-header { margin-bottom: var(--space-12); }
+  .section-title { padding-top: var(--space-4); margin-bottom: var(--space-4); }
+
+  .row { padding-block: var(--space-4) var(--space-6); gap: var(--space-1); }
+  .row-label { font-size: var(--t-small); }
+
+  .actions { flex-direction: column; gap: var(--space-3); }
+  .actions .button { justify-content: center; width: 100%; min-height: 3rem; }
+}

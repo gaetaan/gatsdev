@@ -5,47 +5,56 @@ import { site } from '../data/site';
 
 <BaseLayout
   title="Contact"
-  description={`Contactez Gaëtan Barbaria, lead tech full stack freelance à Aix-Marseille, disponible à partir de ${site.availability}.`}
+  description={`Contactez Gaëtan Barbaria, lead tech full stack Java / Angular freelance à Aix-Marseille, disponible en ${site.availability}.`}
 >
   <header class="page-header">
-    <span class="eyebrow">Contact</span>
     <h1>Parlons de votre projet</h1>
-    <p>
-      Disponible pour de nouvelles missions à partir de {site.availability}, sur Aix-Marseille ou à distance.
+    <p class="lede">
+      <span class="availability">Disponible en {site.availability}</span>, sur Aix‑Marseille, en télétravail ou en
+      mode hybride. Décrivez-moi votre contexte en quelques lignes&#8239;: application, équipe, enjeu, calendrier.
     </p>
   </header>
 
-  <div class="grid contact-grid">
-    <article class="card">
-      <h2>Email</h2>
-      <p>Le moyen le plus simple pour me présenter votre besoin.</p>
-      <p class="contact-value"><a href={`mailto:${site.email}`}>{site.email}</a></p>
-    </article>
-
-    <article class="card">
-      <h2>LinkedIn</h2>
-      <p>Pour suivre mon parcours ou échanger directement.</p>
-      <p class="contact-value">
-        <a href={site.linkedin} rel="me noopener">Voir mon profil LinkedIn<span class="visually-hidden"> (site externe)</span></a>
-      </p>
-    </article>
-
-    <article class="card">
-      <h2>Dossier de compétences</h2>
-      <p>Le détail de mes missions, compétences et références.</p>
-      <p class="contact-value">
-        <a class="button" href={site.resumePdf} download>
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path>
-          </svg>
-          Télécharger (PDF)
-        </a>
-      </p>
-    </article>
-  </div>
+  <dl class="rows contact">
+    <div class="row">
+      <dt class="row-label">Email</dt>
+      <dd class="row-body">
+        <a class="contact-main" href={`mailto:${site.email}`}>{site.email}</a>
+      </dd>
+    </div>
+    <div class="row">
+      <dt class="row-label">LinkedIn</dt>
+      <dd class="row-body">
+        <a href={site.linkedin} rel="me noopener">Gaëtan Barbaria sur LinkedIn</a>
+      </dd>
+    </div>
+    {site.showDocuments && (
+    <div class="row">
+      <dt class="row-label">Documents</dt>
+      <dd class="row-body">
+        <ul class="docs">
+          <li>
+            <a href={site.resumePdf} download>Dossier de compétences</a>
+            <span class="muted">PDF, 7&nbsp;pages, 640&nbsp;Ko</span>
+          </li>
+          <li>
+            <a href={site.cvPdf} download>CV</a>
+            <span class="muted">PDF, 1&nbsp;page, 340&nbsp;Ko</span>
+          </li>
+        </ul>
+      </dd>
+    </div>
+    )}
+  </dl>
 </BaseLayout>
 
 <style>
-  .contact-grid h2 { font-size: 1.2rem; margin-bottom: var(--space-2); }
-  .contact-value { margin-top: var(--space-4); font-weight: 600; overflow-wrap: anywhere; }
+  .lede .availability { color: var(--encre); }
+  dd { margin: 0; }
+  .contact-main { font-size: 1.35rem; font-weight: 600; overflow-wrap: anywhere; }
+  .docs { list-style: none; padding: 0; }
+  .docs li { display: grid; }
+  .docs li + li { margin-top: var(--space-3); }
+  .docs a { font-weight: 600; }
+  .docs .muted { font-size: var(--t-small); }
 </style>

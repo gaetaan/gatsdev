@@ -1,20 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
+import { experiences } from '../data/experiences';
+
+const recent = experiences.slice(0, 2);
+
+const offers = [
+  {
+    title: 'Piloter une refonte',
+    text: 'Passer d’un monolithe ou d’une application instable à des microservices DDD / hexagonaux, sans interrompre le service : cadrage, architecture cible, découpage, mises en production.',
+  },
+  {
+    title: 'Concevoir et livrer, back et front',
+    text: 'Java / Quarkus côté serveur, Angular côté interface, événementiel avec Kafka et Debezium. Avec ce qui va avec : performances Oracle, sécurité des API, accessibilité RGAA, supervision en production.',
+  },
+  {
+    title: 'Faire grandir l’équipe',
+    text: 'Encadrement d’équipes de 3 à 8 personnes, référent technique d’un plateau de 20 à 30 développeurs, Scrum Master : standards communs, revues de code, montée en autonomie.',
+  },
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: site.brand,
-  url: site.url,
-  email: `mailto:${site.email}`,
-  areaServed: 'Aix-Marseille, France',
-  founder: {
-    '@type': 'Person',
-    name: site.owner,
-    jobTitle: site.role,
-    sameAs: [site.linkedin],
-  },
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#person`,
+      name: site.owner,
+      jobTitle: 'Lead tech full stack Java / Angular',
+      url: site.url,
+      email: `mailto:${site.email}`,
+      sameAs: [site.linkedin],
+      address: { '@type': 'PostalAddress', addressLocality: 'Marseille', addressRegion: 'Provence-Alpes-Côte d’Azur', addressCountry: 'FR' },
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'Aix-Marseille Université' },
+      knowsAbout: ['Java', 'Quarkus', 'Angular', 'Domain-Driven Design', 'Architecture hexagonale', 'Microservices', 'Kafka', 'Scrum'],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#service`,
+      name: site.brand,
+      url: site.url,
+      email: `mailto:${site.email}`,
+      founder: { '@id': `${site.url}/#person` },
+      areaServed: [
+        { '@type': 'City', name: 'Marseille' },
+        { '@type': 'City', name: 'Aix-en-Provence' },
+        { '@type': 'Country', name: 'France' },
+      ],
+    },
+  ],
 };
 ---
 
@@ -22,66 +56,78 @@ const jsonLd = {
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="hero" aria-labelledby="hero-title">
-    <p class="availability">
-      <span class="dot" aria-hidden="true"></span>
-      Disponible à partir de {site.availability}
-    </p>
-    <h1 id="hero-title">{site.owner}</h1>
-    <p class="hero-role">{site.role} · {site.location}</p>
-    <p class="hero-pitch">
-      J’aide les équipes à concevoir et livrer des applications métier robustes&nbsp;: une architecture
-      claire, un code maintenable et des développeurs qui progressent ensemble.
-    </p>
-    <div class="actions">
-      <a class="button" href="/contact/">Me contacter</a>
-      <a class="button button--ghost" href="/expertise/">Voir mon expertise</a>
+    <div>
+      <p class="availability">Disponible en {site.availability}</p>
+      <h1 id="hero-title">{site.owner}</h1>
+      <p class="hero-role">Lead tech full stack Java&nbsp;/&nbsp;Angular, freelance à&nbsp;Aix‑Marseille</p>
+      <p class="lede">
+        J’accompagne les équipes qui doivent faire évoluer une application métier critique. Depuis {site.yearsOfExperience}&nbsp;ans,
+        sur des applications utilisées dans toute la France, je conçois l’architecture, je code côté serveur comme côté
+        interface, et je fais monter l’équipe en autonomie.
+      </p>
+      <div class="actions">
+        <a class="button" href="/contact/">Me contacter</a>
+        <a class="button button--ghost" href="/experiences/">Voir les missions</a>
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="apport-title">
-    <h2 id="apport-title">Ce que j’apporte</h2>
-    <div class="grid">
-      <article class="card">
-        <h3>Développement full stack</h3>
-        <p>Back-end Java / Quarkus 3 et front-end Angular, de la conception à la mise en production.</p>
-      </article>
-      <article class="card">
-        <h3>Architecture logicielle</h3>
-        <p>Architecture hexagonale et DDD pour des systèmes lisibles, testables et faciles à faire évoluer.</p>
-      </article>
-      <article class="card">
-        <h3>Leadership technique</h3>
-        <p>Encadrement d’équipes jusqu’à 8 développeurs, référent technique sur un plateau de 20 à 30 devs, Scrum Master.</p>
-      </article>
-    </div>
+  <section class="section" aria-labelledby="offre-title">
+    <h2 id="offre-title" class="section-title">Domaines d’intervention</h2>
+    <ul class="rows">
+      {
+        offers.map((o) => (
+          <li class="row">
+            <h3>{o.title}</h3>
+            <p class="row-body">{o.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="missions-title">
+    <h2 id="missions-title" class="section-title">Missions récentes</h2>
+    <ul class="rows">
+      {
+        recent.map((xp) => (
+          <li class="row">
+            <p class="row-label">
+              <time datetime={xp.start}>{xp.period}</time>
+            </p>
+            <div class="row-body">
+              <h3>
+                <a href={`/experiences/#${xp.id}`}>Projet {xp.project}</a>
+              </h3>
+              <p class="muted">
+                {xp.role}, {xp.company} pour {xp.client}
+              </p>
+              <p>{xp.summary}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="more"><a href="/experiences/">Toutes les missions depuis 2020</a></p>
   </section>
 </BaseLayout>
 
 <style>
-  .hero { max-width: 46rem; padding-block: var(--space-8) var(--space-4); }
-  .availability {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
-    padding: 0.3rem 0.8rem;
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--accent-strong);
-    background: var(--accent-soft);
-    border-radius: 999px;
+  .hero { max-width: 44rem; padding-top: var(--space-12); }
+  @media (max-width: 40rem) {
+    .hero { padding-top: var(--space-4); }
+    .availability { margin-bottom: var(--space-6); }
   }
-  .dot {
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: 50%;
-    background: light-dark(#1a7f37, #4ac26b);
-  }
+  .availability { margin-bottom: var(--space-8); }
   .hero-role {
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
     font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
-    font-weight: 600;
-    color: var(--text-muted);
+    font-weight: 500;
   }
-  .hero-pitch { margin-top: var(--space-6); font-size: 1.15rem; }
+  .hero .lede { margin-top: var(--space-6); }
+
+  .row h3 { font-size: 1.1rem; }
+  .row-body h3 a { color: var(--encre); text-decoration-color: var(--filet); }
+  .row-body h3 a:hover { color: var(--cobalt-fonce); text-decoration-color: currentColor; }
+  .more { margin-top: var(--space-6); font-weight: 500; }
 </style>

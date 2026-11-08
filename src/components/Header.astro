@@ -8,9 +8,12 @@ const current = normalize(Astro.url.pathname);
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label={`${site.brand} — accueil`}>
-      <span class="brand-mark" aria-hidden="true">G</span>
-      <span>{site.brand}</span>
+    <a class="brand" href="/" translate="no">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <polygon class="outer" points="16,2 28.1,9 28.1,23 16,30 3.9,23 3.9,9"></polygon>
+        <polygon class="inner" points="16,10 21.2,13 21.2,19 16,22 10.8,19 10.8,13"></polygon>
+      </svg>
+      <span>{site.brand}<span class="visually-hidden">, accueil</span></span>
     </a>
     <nav aria-label="Navigation principale">
       <ul>
@@ -30,10 +33,7 @@ const current = normalize(Astro.url.pathname);
 </header>
 
 <style>
-  .site-header {
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-  }
+  .site-header { border-bottom: 1px solid var(--filet); }
   .header-inner {
     display: flex;
     flex-wrap: wrap;
@@ -45,45 +45,51 @@ const current = normalize(Astro.url.pathname);
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
+    min-height: 2.75rem;
     margin-right: auto;
-    font-weight: 750;
-    font-size: 1.1rem;
-    color: var(--text);
+    font-weight: 650;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--encre);
     text-decoration: none;
   }
-  .brand:hover { color: var(--text); }
-  .brand-mark {
-    display: inline-grid;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 8px;
-    background: var(--accent);
-    color: var(--accent-contrast);
-    font-size: 1rem;
-  }
+  .brand:hover { color: var(--encre); }
+  .brand-mark { width: 1.75rem; height: 1.75rem; }
+  .brand-mark .outer { fill: none; stroke: var(--cobalt); stroke-width: 2.5; stroke-linejoin: round; }
+  .brand-mark .inner { fill: var(--cobalt); }
+
   nav ul {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1) var(--space-2);
+    gap: 0 var(--space-1);
     padding: 0;
     list-style: none;
   }
   nav a {
-    display: inline-block;
-    padding: 0.45rem 0.7rem;
-    border-radius: 8px;
-    color: var(--text-muted);
-    font-weight: 550;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.7rem;
+    color: var(--ardoise);
+    font-weight: 500;
     text-decoration: none;
+    touch-action: manipulation;
   }
-  nav a:hover { color: var(--text); background: var(--accent-soft); }
-  nav a[aria-current='page'] { color: var(--accent-strong); background: var(--accent-soft); }
+  nav a:hover { color: var(--encre); }
+  /* Page active : couleur + soulignement épais (pas uniquement la couleur). */
+  nav a[aria-current='page'] {
+    color: var(--encre);
+    text-decoration: underline;
+    text-decoration-color: var(--cobalt);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.45em;
+  }
 
-  /* Mobile : la navigation passe sous la marque, sur toute la largeur. */
+  /* Mobile : la navigation passe sous la marque, répartie sur toute la largeur. */
   @media (max-width: 40rem) {
-    nav { order: 3; width: 100%; margin-inline: -0.45rem; }
-    nav ul { gap: 0; }
-    nav a { padding: 0.4rem 0.45rem; font-size: 0.95rem; }
+    .header-inner { padding-block: var(--space-3) 0; gap: 0; }
+    nav { order: 3; width: 100%; margin-top: var(--space-2); }
+    nav ul { justify-content: space-between; gap: 0; margin-inline: -0.4rem; }
+    nav a { padding-inline: 0.4rem; font-size: 0.97rem; }
   }
 </style>

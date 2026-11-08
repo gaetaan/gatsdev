@@ -16,9 +16,9 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--filet);
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: var(--ardoise);
   }
   .footer-inner {
     display: flex;
@@ -34,6 +34,14 @@ const year = new Date().getFullYear();
     padding: 0;
     list-style: none;
   }
-  a { color: var(--text-muted); }
-  a:hover { color: var(--accent-strong); }
+  a { color: var(--ardoise); }
+
+  /* Mobile : liens empilés, zones de contact confortables, copyright en dernier. */
+  @media (max-width: 40rem) {
+    .footer-inner { flex-direction: column-reverse; gap: var(--space-4); padding-block: var(--space-6) var(--space-8); }
+    ul { flex-direction: column; gap: 0; }
+    li a { display: flex; align-items: center; min-height: 2.75rem; }
+    p { font-size: var(--t-small); }
+  }
+  a:hover { color: var(--cobalt-fonce); }
 </style>

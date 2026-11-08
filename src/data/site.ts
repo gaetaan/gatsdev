@@ -9,13 +9,16 @@ export const site = {
   role: 'Lead tech full stack freelance',
   location: 'Aix-Marseille',
   availability: 'janvier 2027',
+  availabilityIso: '2027-01',
+  yearsOfExperience: 6,
   email: 'contact@gatsdev.fr',
-  // TODO : remplacer par l'URL de votre profil LinkedIn.
-  linkedin: 'https://www.linkedin.com/in/VOTRE-PROFIL/',
-  // Déposez le PDF dans /public sous ce nom (ou changez le chemin).
+  linkedin: 'https://www.linkedin.com/in/ga%C3%ABtan-barbaria-85a842151/',
+  // Passer à true une fois les PDF déposés dans /public (affiche les liens de téléchargement).
+  showDocuments: false,
   resumePdf: '/dossier-de-competences-gaetan-barbaria.pdf',
+  cvPdf: '/cv-gaetan-barbaria.pdf',
   defaultDescription:
-    'Gaëtan Barbaria, lead tech full stack freelance à Aix-Marseille : Java / Quarkus, Angular, architecture hexagonale & DDD, encadrement d’équipes. Disponible à partir de janvier 2027.',
+    'Gaëtan Barbaria, lead tech full stack Java / Quarkus et Angular, freelance à Aix-Marseille. Refontes vers des microservices DDD et hexagonaux, encadrement d’équipes. Disponible en janvier 2027.',
 } as const;
 
 // Informations légales (page Mentions légales).
@@ -33,7 +36,7 @@ export const legal = {
     url: 'https://pages.github.com',
   },
   // Date de dernière mise à jour des mentions légales.
-  updatedAt: '8 novembre 2026',
+  updatedAt: '9 novembre 2026',
 } as const;
 
 export const nav = [
