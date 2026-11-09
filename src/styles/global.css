@@ -81,6 +81,8 @@ body {
 
 img, svg { display: block; max-width: 100%; }
 
+::selection { background: var(--cobalt-voile); color: var(--encre); }
+
 h1, h2, h3 {
   line-height: 1.15;
   font-weight: 600;
@@ -214,13 +216,14 @@ dd { margin: 0; }
   color: var(--sur-cobalt);
   cursor: pointer;
   touch-action: manipulation;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 .button:hover {
   background: var(--cobalt-fonce);
   border-color: var(--cobalt-fonce);
   color: var(--sur-cobalt);
 }
+.button:active { transform: scale(0.98); }
 .button--ghost { background: transparent; color: var(--cobalt); }
 .button--ghost:hover { background: var(--cobalt-voile); color: var(--cobalt-fonce); }
 .button svg { width: 1.1em; height: 1.1em; flex: none; }

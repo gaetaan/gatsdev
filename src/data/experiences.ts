@@ -6,7 +6,8 @@ export interface Experience {
   start: string; // AAAA-MM, pour <time datetime>
   end?: string; // absent = en cours
   period: string; // libellé affiché
-  project: string;
+  project: string; // nom de code interne
+  title: string; // ce que fait l'application, en clair
   role: string;
   company: string;
   client: string;
@@ -21,6 +22,7 @@ export const experiences: Experience[] = [
     start: '2026-06',
     period: 'Depuis juin 2026',
     project: 'TCU',
+    title: 'Historique des contacts usagers',
     role: 'Leader technique full stack',
     company: 'Sopra Steria',
     client: 'France Travail',
@@ -40,6 +42,7 @@ export const experiences: Experience[] = [
     end: '2026-06',
     period: 'Juin 2024 – juin 2026',
     project: 'CVM',
+    title: 'Messagerie conseillers et usagers',
     role: 'Leader technique full stack',
     company: 'Sopra Steria',
     client: 'France Travail',
@@ -58,7 +61,8 @@ export const experiences: Experience[] = [
     start: '2024-04',
     end: '2024-06',
     period: 'Avril – juin 2024',
-    project: 'GUR, migration',
+    project: 'GUR',
+    title: 'Migration WebLogic vers Quarkus',
     role: 'Leader technique full stack',
     company: 'Sopra Steria',
     client: 'France Travail',
@@ -77,6 +81,7 @@ export const experiences: Experience[] = [
     end: '2024-03',
     period: 'Nov. 2022 – mars 2024',
     project: 'OMERE',
+    title: 'Gestion des médiations',
     role: 'Leader technique full stack & Scrum Master',
     company: 'Sopra Steria',
     client: 'France Travail',
@@ -95,6 +100,7 @@ export const experiences: Experience[] = [
     end: '2022-12',
     period: 'Sept. 2020 – déc. 2022',
     project: 'GUR',
+    title: 'Gestion des réclamations',
     role: 'Développeur puis leader technique full stack',
     company: 'Sopra Steria',
     client: 'France Travail',
@@ -113,6 +119,7 @@ export const experiences: Experience[] = [
     end: '2020-11',
     period: 'Juin – nov. 2020',
     project: 'Loop',
+    title: 'Suivi d’indicateurs',
     role: 'Développeur front-end puis full stack',
     company: 'Sopra Steria',
     client: 'France Travail',

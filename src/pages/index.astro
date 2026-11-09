@@ -102,10 +102,10 @@ const jsonLd = {
             </p>
             <div class="row-body">
               <h3>
-                <a href={`/experiences/#${xp.id}`}>Projet {xp.project}</a>
+                <a href={`/experiences/#${xp.id}`}>{xp.title}</a>
               </h3>
               <p class="muted">
-                {xp.role}, {xp.company} pour {xp.client}
+                {xp.role}, projet <span translate="no">{xp.project}</span> pour {xp.client}
               </p>
               <p>{xp.summary}</p>
             </div>

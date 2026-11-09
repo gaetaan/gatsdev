@@ -6,6 +6,7 @@ interface Props {
   secondary?: { href: string; label: string };
 }
 const { secondary } = Astro.props;
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Mission freelance')}`;
 ---
 
 <aside class="page-end" aria-labelledby="page-end-title">
@@ -15,7 +16,12 @@ const { secondary } = Astro.props;
     commencer.
   </p>
   <div class="actions">
-    <a class="button" href="/contact/">Me contacter</a>
+    <a class="button" href={mailto}>
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm-.5 1 8.5 6.5L20.5 7" />
+      </svg>
+      Écrire un email
+    </a>
     {secondary && <a class="button button--ghost" href={secondary.href}>{secondary.label}</a>}
   </div>
 </aside>
