@@ -4,6 +4,7 @@ import fontUrl from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-lati
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PageTransitions from '../components/PageTransitions.astro';
 
 interface Props {
   title?: string;
@@ -38,6 +39,7 @@ const fontFace = `@font-face{font-family:'IBM Plex Sans Variable';font-style:nor
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <PageTransitions />
     <slot name="head" />
   </head>
   <body>

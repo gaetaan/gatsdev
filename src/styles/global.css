@@ -85,6 +85,9 @@ h1, h2, h3 {
   line-height: 1.15;
   font-weight: 600;
   text-wrap: balance;
+  /* Texte agrandi (zoom 200 %) sur petit écran : on coupe plutôt que de déborder. */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 h1 { font-size: var(--t-h1); letter-spacing: -0.03em; }
 h2 { font-size: var(--t-h2); letter-spacing: -0.02em; }
@@ -134,7 +137,8 @@ a:hover { color: var(--cobalt-fonce); text-decoration-thickness: 2px; }
 .skip-link {
   position: absolute;
   left: var(--space-4);
-  top: -100px;
+  top: var(--space-4);
+  transform: translateY(calc(-100% - 2rem));
   z-index: 100;
   padding: var(--space-2) var(--space-4);
   background: var(--cobalt);
@@ -142,7 +146,7 @@ a:hover { color: var(--cobalt-fonce); text-decoration-thickness: 2px; }
   border-radius: var(--radius);
   font-weight: 600;
 }
-.skip-link:focus { top: var(--space-4); color: var(--sur-cobalt); }
+.skip-link:focus { transform: none; color: var(--sur-cobalt); }
 
 .muted { color: var(--ardoise); }
 
@@ -256,4 +260,39 @@ main:focus { outline: none; }
 
   .actions { flex-direction: column; gap: var(--space-3); }
   .actions .button { justify-content: center; width: 100%; min-height: 3rem; }
+}
+
+/* --- Barre d'onglets mobile : réserve la place en bas de page ---------- */
+@media (max-width: 40rem) {
+  body { padding-bottom: calc(env(safe-area-inset-bottom) + 5.25rem); }
+  /* Un élément qui reçoit le focus ne doit pas finir caché sous la barre. */
+  html { scroll-padding-bottom: calc(env(safe-area-inset-bottom) + 6rem); }
+}
+
+/* --- Transitions entre pages (View Transitions, CSS uniquement) -------
+   L'en-tête et la barre d'onglets restent en place ; le contenu glisse
+   dans le sens de la navigation (data-nav-dir posé par PageTransitions). */
+@view-transition { navigation: auto; }
+
+main { view-transition-name: page; }
+
+::view-transition-group(page) { animation: none; }
+::view-transition-old(page),
+::view-transition-new(page) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  animation-fill-mode: both;
+}
+html[data-nav-dir='forward']::view-transition-old(page) { animation-name: vt-out-left; }
+html[data-nav-dir='forward']::view-transition-new(page) { animation-name: vt-in-right; }
+html[data-nav-dir='back']::view-transition-old(page) { animation-name: vt-out-right; }
+html[data-nav-dir='back']::view-transition-new(page) { animation-name: vt-in-left; }
+
+@keyframes vt-out-left { to { transform: translateX(-14%); opacity: 0; } }
+@keyframes vt-out-right { to { transform: translateX(14%); opacity: 0; } }
+@keyframes vt-in-right { from { transform: translateX(14%); opacity: 0; } }
+@keyframes vt-in-left { from { transform: translateX(-14%); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
 }

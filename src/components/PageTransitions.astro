@@ -1,0 +1,83 @@
+---
+// Navigation « façon appli » sans framework :
+// 1. balayer vers la gauche / la droite passe à la page suivante / précédente
+//    (dans l'ordre du menu) ;
+// 2. les changements de page glissent dans le bon sens grâce aux View Transitions
+//    du navigateur (CSS uniquement ; sans support, la page change normalement) ;
+// 3. les pages du menu sont préchargées pour que le changement soit instantané.
+// Le menu reste la façon principale de naviguer : le geste n'est qu'un raccourci.
+---
+
+<script is:inline>
+  (() => {
+    const KEY = 'nav-dir';
+    const links = () => [...document.querySelectorAll('[data-page-nav] a')];
+    const currentIndex = () => links().findIndex((a) => a.getAttribute('aria-current') === 'page');
+
+    const go = (href, dir) => {
+      try { sessionStorage.setItem(KEY, dir); } catch (e) {}
+      location.href = href;
+    };
+
+    // Sens de l'animation quand on touche un lien du menu.
+    document.addEventListener('click', (e) => {
+      const a = e.target instanceof Element && e.target.closest('[data-page-nav] a');
+      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const list = links();
+      const from = currentIndex();
+      const to = list.indexOf(a);
+      if (from === -1 || to === from) return;
+      try { sessionStorage.setItem(KEY, to > from ? 'forward' : 'back'); } catch (err) {}
+    });
+
+    // Geste de balayage horizontal (écrans tactiles uniquement).
+    let start = null;
+    document.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) { start = null; return; }
+      const t = e.touches[0];
+      const edge = 32; // laisse les bords au geste « retour » du système
+      const target = e.target instanceof Element ? e.target : null;
+      if (t.clientX < edge || t.clientX > innerWidth - edge || (target && target.closest('input, textarea, select, [data-no-swipe]'))) {
+        start = null;
+        return;
+      }
+      start = { x: t.clientX, y: t.clientY, time: Date.now() };
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (!start) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - start.x;
+      const dy = t.clientY - start.y;
+      const fast = Date.now() - start.time < 700;
+      start = null;
+      if (!fast || Math.abs(dx) < 70 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
+      if (String(getSelection && getSelection()).length > 0) return;
+      const list = links();
+      const i = currentIndex();
+      if (i === -1) return;
+      const next = dx < 0 ? list[i + 1] : list[i - 1];
+      if (next) go(next.href, dx < 0 ? 'forward' : 'back');
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
+
+    // Applique le sens sur la nouvelle page, le temps de la transition.
+    addEventListener('pagereveal', (e) => {
+      let dir = null;
+      try { dir = sessionStorage.getItem(KEY); sessionStorage.removeItem(KEY); } catch (err) {}
+      if (!e.viewTransition || !dir) return;
+      const root = document.documentElement;
+      root.dataset.navDir = dir;
+      e.viewTransition.finished.finally(() => delete root.dataset.navDir);
+    });
+  })();
+</script>
+
+<!-- Préchargement des pages du menu (navigateurs compatibles ; ignoré ailleurs). -->
+<script type="speculationrules" is:inline>
+  {
+    "prefetch": [{ "source": "document", "where": { "selector_matches": "[data-page-nav] a" }, "eagerness": "eager" }],
+    "prerender": [{ "source": "document", "where": { "href_matches": "/*" }, "eagerness": "moderate" }]
+  }
+</script>
