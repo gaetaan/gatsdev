@@ -2,15 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { experiences } from '../data/experiences';
 import { site } from '../data/site';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import PageEnd from '../components/PageEnd.astro';
 ---
 
 <BaseLayout
   title="Expériences et missions"
   description="Missions de Gaëtan Barbaria depuis 2020 : refontes vers des microservices DDD / hexagonaux, chat national, migration WebLogic vers Quarkus, encadrement d’équipes."
 >
-  <header class="page-header">
-    <h1>Expériences</h1>
-    <p class="lede">
+  <PageHeader title="Expériences">
       Six missions depuis 2020, toutes sur des applications métier nationales, de développeur unique à leader technique
       d’une équipe de 8&nbsp;personnes.
       {
@@ -24,9 +25,9 @@ import { site } from '../data/site';
           </>
         )
       }
-    </p>
-  </header>
+  </PageHeader>
 
+  <Section id="missions" title="Missions depuis 2020">
   <ol class="rows timeline">
     {
       experiences.map((xp) => (
@@ -35,7 +36,7 @@ import { site } from '../data/site';
             <time datetime={xp.start}>{xp.period}</time>
           </p>
           <article class="row-body" aria-labelledby={`${xp.id}-title`}>
-            <h2 id={`${xp.id}-title`}>Projet {xp.project}</h2>
+            <h3 id={`${xp.id}-title`}>Projet {xp.project}</h3>
             <p class="xp-meta">
               {xp.role}
               <br />
@@ -59,30 +60,25 @@ import { site } from '../data/site';
     }
   </ol>
 
-  <div class="actions">
-    {
-      site.showDocuments && (
-        <a class="button" href={site.resumePdf} download>
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-          </svg>
-          Dossier de compétences (PDF)
-        </a>
-      )
-    }
-    <a class={site.showDocuments ? 'button button--ghost' : 'button'} href="/contact/">Me contacter</a>
-  </div>
+  </Section>
+
+  {
+    site.showDocuments ? (
+      <PageEnd secondary={{ href: site.resumePdf, label: 'Dossier de compétences (PDF)' }} />
+    ) : (
+      <PageEnd secondary={{ href: '/expertise/', label: 'Voir l’expertise' }} />
+    )
+  }
 </BaseLayout>
 
 <style>
   .timeline > .row { padding-block: var(--space-8); }
   .timeline > .row:first-child { padding-top: 0; }
-  .timeline h2 { font-size: 1.45rem; }
+  .timeline h3 { font-size: 1.35rem; letter-spacing: -0.015em; }
   .xp-meta { font-weight: 500; }
   .xp-stack {
     padding-top: var(--space-3);
     font-size: var(--t-small);
     color: var(--ardoise);
   }
-  .actions { margin-top: var(--space-12); }
 </style>

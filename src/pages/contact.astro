@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
 import { site } from '../data/site';
 ---
 
@@ -7,50 +9,66 @@ import { site } from '../data/site';
   title="Contact"
   description={`Contactez Gaëtan Barbaria, lead tech full stack Java / Angular freelance à Aix-Marseille, disponible en ${site.availability}.`}
 >
-  <header class="page-header">
-    <h1>Parlons de votre projet</h1>
-    <p class="lede">
-      <span class="availability">Disponible en {site.availability}</span>, sur Aix‑Marseille, en télétravail ou en
-      mode hybride. Décrivez-moi votre contexte en quelques lignes&#8239;: application, équipe, enjeu, calendrier.
-    </p>
-  </header>
+  <PageHeader title="Parlons de votre projet">
+    Décrivez-moi votre contexte en quelques lignes&#8239;: l’application, l’équipe, l’enjeu et le calendrier. Je vous
+    réponds personnellement.
+  </PageHeader>
 
-  <dl class="rows contact">
-    <div class="row">
-      <dt class="row-label">Email</dt>
-      <dd class="row-body">
-        <a class="contact-main" href={`mailto:${site.email}`}>{site.email}</a>
-      </dd>
-    </div>
-    <div class="row">
-      <dt class="row-label">LinkedIn</dt>
-      <dd class="row-body">
-        <a href={site.linkedin} rel="me noopener">Gaëtan Barbaria sur LinkedIn</a>
-      </dd>
-    </div>
-    {site.showDocuments && (
-    <div class="row">
-      <dt class="row-label">Documents</dt>
-      <dd class="row-body">
-        <ul class="docs">
-          <li>
-            <a href={site.resumePdf} download>Dossier de compétences</a>
-            <span class="muted">PDF, 7&nbsp;pages, 640&nbsp;Ko</span>
-          </li>
-          <li>
-            <a href={site.cvPdf} download>CV</a>
-            <span class="muted">PDF, 1&nbsp;page, 340&nbsp;Ko</span>
-          </li>
-        </ul>
-      </dd>
-    </div>
-    )}
-  </dl>
+  <Section id="coordonnees" title="Coordonnées">
+    <dl class="rows">
+      <div class="row">
+        <dt class="row-label">Email</dt>
+        <dd class="row-body">
+          <a class="contact-main" href={`mailto:${site.email}`}>{site.email}</a>
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="row-label">LinkedIn</dt>
+        <dd class="row-body">
+          <a href={site.linkedin} rel="me noopener">Gaëtan Barbaria sur LinkedIn</a>
+        </dd>
+      </div>
+      {
+        site.showDocuments && (
+          <div class="row">
+            <dt class="row-label">Documents</dt>
+            <dd class="row-body">
+              <ul class="docs">
+                <li>
+                  <a href={site.resumePdf} download>Dossier de compétences</a>
+                  <span class="muted">PDF, 7&nbsp;pages, 640&nbsp;Ko</span>
+                </li>
+                <li>
+                  <a href={site.cvPdf} download>CV</a>
+                  <span class="muted">PDF, 1&nbsp;page, 340&nbsp;Ko</span>
+                </li>
+              </ul>
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </Section>
+
+  <Section id="modalites" title="Modalités">
+    <dl class="rows">
+      <div class="row">
+        <dt class="row-label">Disponibilité</dt>
+        <dd class="row-body"><span class="availability">À partir de {site.availability}</span></dd>
+      </div>
+      <div class="row">
+        <dt class="row-label">Lieu</dt>
+        <dd class="row-body">Aix‑Marseille, en télétravail ou en mode hybride</dd>
+      </div>
+      <div class="row">
+        <dt class="row-label">Statut</dt>
+        <dd class="row-body">Freelance, entrepreneur individuel</dd>
+      </div>
+    </dl>
+  </Section>
 </BaseLayout>
 
 <style>
-  .lede .availability { color: var(--encre); }
-  dd { margin: 0; }
   .contact-main { font-size: 1.35rem; font-weight: 600; overflow-wrap: anywhere; }
   .docs { list-style: none; padding: 0; }
   .docs li { display: grid; }

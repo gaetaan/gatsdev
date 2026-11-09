@@ -154,13 +154,15 @@ a:hover { color: var(--cobalt-fonce); text-decoration-thickness: 2px; }
 main { flex: 1; padding-block: var(--space-12) var(--space-24); }
 main:focus { outline: none; }
 
-.page-header { max-width: var(--measure); margin-bottom: var(--space-16); }
+.page-header { max-width: var(--measure); }
+dd { margin: 0; }
 .page-header .lede { margin-top: var(--space-6); }
 
 .lede { font-size: 1.2rem; line-height: 1.6; color: var(--ardoise); }
 
-/* Une rubrique = un filet épais + un titre. */
+/* Une rubrique = un filet épais + un titre. Même rythme sur toutes les pages. */
 .section { margin-top: var(--space-24); }
+.page-header + .section { margin-top: var(--space-16); }
 .section-title {
   padding-top: var(--space-6);
   border-top: 2px solid var(--encre);
@@ -252,8 +254,8 @@ main:focus { outline: none; }
   main { padding-block: var(--space-8) var(--space-16); }
   h1 { letter-spacing: -0.025em; }
   .lede { font-size: 1.1rem; line-height: 1.6; }
-  .page-header { margin-bottom: var(--space-12); }
   .section-title { padding-top: var(--space-4); margin-bottom: var(--space-4); }
+  .page-header + .section { margin-top: var(--space-12); }
 
   .row { padding-block: var(--space-4) var(--space-6); gap: var(--space-1); }
   .row-label { font-size: var(--t-small); }

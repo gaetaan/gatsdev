@@ -1,0 +1,13 @@
+---
+// Rubrique commune : un filet épais, un titre, puis le contenu.
+interface Props {
+  id: string;
+  title: string;
+}
+const { id, title } = Astro.props;
+---
+
+<section class="section" aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`} class="section-title">{title}</h2>
+  <slot />
+</section>

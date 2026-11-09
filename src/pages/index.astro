@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import PageEnd from '../components/PageEnd.astro';
 import { site } from '../data/site';
 import { experiences } from '../data/experiences';
 
@@ -72,8 +74,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="section" aria-labelledby="offre-title">
-    <h2 id="offre-title" class="section-title">Domaines d’intervention</h2>
+  <Section id="offre" title="Domaines d’intervention">
     <ul class="rows">
       {
         offers.map((o) => (
@@ -84,10 +85,9 @@ const jsonLd = {
         ))
       }
     </ul>
-  </section>
+  </Section>
 
-  <section class="section" aria-labelledby="missions-title">
-    <h2 id="missions-title" class="section-title">Missions récentes</h2>
+  <Section id="missions" title="Missions récentes">
     <ul class="rows">
       {
         recent.map((xp) => (
@@ -109,7 +109,9 @@ const jsonLd = {
       }
     </ul>
     <p class="more"><a href="/experiences/">Toutes les missions depuis 2020</a></p>
-  </section>
+  </Section>
+
+  <PageEnd secondary={{ href: '/expertise/', label: 'Voir l’expertise' }} />
 </BaseLayout>
 
 <style>
@@ -126,7 +128,6 @@ const jsonLd = {
   }
   .hero .lede { margin-top: var(--space-6); }
 
-  .row h3 { font-size: 1.1rem; }
   .row-body h3 a { color: var(--encre); text-decoration-color: var(--filet); }
   .row-body h3 a:hover { color: var(--cobalt-fonce); text-decoration-color: currentColor; }
   .more { margin-top: var(--space-6); font-weight: 500; }

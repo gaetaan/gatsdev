@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import PageEnd from '../components/PageEnd.astro';
 import { technical, training } from '../data/skills';
 
 const leadership = [
@@ -28,18 +31,14 @@ const leadership = [
 
 <BaseLayout
   title="Expertise Java, Quarkus, Angular, DDD"
-  description="Compétences de Gaëtan Barbaria : Java 25, Quarkus 3, Angular 22, architecture hexagonale et DDD, Kafka, Oracle, Kubernetes, encadrement d’équipes et Scrum Master."
+  description="Compétences de Gaëtan Barbaria : Java 25, Quarkus 3, Angular 22, architecture hexagonale et DDD, Kafka, Oracle, Kubernetes, encadrement d’équipes et Scrum Master."
 >
-  <header class="page-header">
-    <h1>Expertise</h1>
-    <p class="lede">
-      Un profil full stack orienté architecture, avec l’expérience de l’encadrement et de la coordination d’équipes sur
-      des applications nationales à forte volumétrie.
-    </p>
-  </header>
+  <PageHeader title="Expertise">
+    Un profil full stack orienté architecture, avec l’expérience de l’encadrement et de la coordination d’équipes sur
+    des applications nationales à forte volumétrie.
+  </PageHeader>
 
-  <section aria-labelledby="lead-title">
-    <h2 id="lead-title" class="section-title">Pilotage et méthodes</h2>
+  <Section id="pilotage" title="Pilotage et méthodes">
     <ul class="rows">
       {
         leadership.map((l) => (
@@ -50,10 +49,9 @@ const leadership = [
         ))
       }
     </ul>
-  </section>
+  </Section>
 
-  <section class="section" aria-labelledby="tech-title">
-    <h2 id="tech-title" class="section-title">Socle technique</h2>
+  <Section id="socle" title="Socle technique">
     <dl class="rows">
       {
         technical.map((g) => (
@@ -64,10 +62,9 @@ const leadership = [
         ))
       }
     </dl>
-  </section>
+  </Section>
 
-  <section class="section" aria-labelledby="formation-title">
-    <h2 id="formation-title" class="section-title">Formations et langues</h2>
+  <Section id="formation" title="Formations et langues">
     <dl class="rows">
       {
         training.map((t) => (
@@ -82,16 +79,7 @@ const leadership = [
         <dd class="row-body">Français (langue maternelle), anglais professionnel</dd>
       </div>
     </dl>
-  </section>
+  </Section>
 
-  <div class="actions">
-    <a class="button" href="/experiences/">Voir les missions</a>
-    <a class="button button--ghost" href="/contact/">Me contacter</a>
-  </div>
+  <PageEnd secondary={{ href: '/experiences/', label: 'Voir les missions' }} />
 </BaseLayout>
-
-<style>
-  .row h3 { font-size: 1.1rem; }
-  dd { margin: 0; }
-  .actions { margin-top: var(--space-16); }
-</style>

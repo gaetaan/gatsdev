@@ -1,13 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <BaseLayout title="Page introuvable" description="Cette page n’existe pas ou a été déplacée." noindex>
-  <header class="page-header">
-    <h1>Page introuvable</h1>
-    <p class="lede">L’adresse est peut-être mal saisie, ou la page a été déplacée. Repartez de l’accueil ou écrivez-moi si un lien est cassé.</p>
-  </header>
+  <PageHeader title="Page introuvable">
+    L’adresse est peut-être mal saisie, ou la page a été déplacée. Repartez de l’accueil ou écrivez-moi si un lien est
+    cassé.
+  </PageHeader>
   <div class="actions">
     <a class="button" href="/">Retour à l’accueil</a>
+    <a class="button button--ghost" href="/contact/">Signaler un lien cassé</a>
   </div>
 </BaseLayout>
