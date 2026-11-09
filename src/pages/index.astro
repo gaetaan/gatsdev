@@ -6,6 +6,7 @@ import { site } from '../data/site';
 import { experiences } from '../data/experiences';
 
 const recent = experiences.slice(0, 2);
+const stack = ['Java 25', 'Quarkus 3', 'Angular 22', 'Kafka', 'Oracle', 'Kubernetes'];
 
 const offers = [
   {
@@ -62,6 +63,10 @@ const jsonLd = {
       <p class="availability">Disponible en {site.availability}</p>
       <h1 id="hero-title">{site.owner}</h1>
       <p class="hero-role">Lead tech full stack Java&nbsp;/&nbsp;Angular, freelance à&nbsp;Aix‑Marseille</p>
+      <p class="hero-stack">
+        <span class="visually-hidden">Technologies principales&#8239;: </span>
+        <span translate="no">{stack.join(', ')}</span>
+      </p>
       <p class="lede">
         J’accompagne les équipes qui doivent faire évoluer une application métier critique. Depuis {site.yearsOfExperience}&nbsp;ans,
         sur des applications utilisées dans toute la France, je conçois l’architecture, je code côté serveur comme côté
@@ -126,6 +131,7 @@ const jsonLd = {
     font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
     font-weight: 500;
   }
+  .hero-stack { margin-top: var(--space-2); color: var(--ardoise); font-size: var(--t-small); letter-spacing: 0.01em; }
   .hero .lede { margin-top: var(--space-6); }
 
   .row-body h3 a { color: var(--encre); text-decoration-color: var(--filet); }

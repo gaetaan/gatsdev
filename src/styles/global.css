@@ -62,7 +62,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: var(--space-8);
+  scroll-padding-top: 6rem; /* en-tête fixe sur ordinateur */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -268,7 +268,7 @@ dd { margin: 0; }
 @media (max-width: 40rem) {
   body { padding-bottom: calc(env(safe-area-inset-bottom) + 5.25rem); }
   /* Un élément qui reçoit le focus ne doit pas finir caché sous la barre. */
-  html { scroll-padding-bottom: calc(env(safe-area-inset-bottom) + 6rem); }
+  html { scroll-padding-top: 1.5rem; scroll-padding-bottom: calc(env(safe-area-inset-bottom) + 6rem); }
 }
 
 /* --- Transitions entre pages (View Transitions, CSS uniquement) -------

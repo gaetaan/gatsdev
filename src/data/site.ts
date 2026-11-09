@@ -18,16 +18,17 @@ export const site = {
   resumePdf: '/dossier-de-competences-gaetan-barbaria.pdf',
   cvPdf: '/cv-gaetan-barbaria.pdf',
   defaultDescription:
-    'Gaëtan Barbaria, lead tech full stack Java / Quarkus et Angular, freelance à Aix-Marseille. Refontes vers des microservices DDD et hexagonaux, encadrement d’équipes. Disponible en janvier 2027.',
+    'Lead tech full stack Java / Quarkus et Angular, freelance à Aix-Marseille : refontes DDD et hexagonales, encadrement d’équipes. Disponible en janvier 2027.',
 } as const;
 
 // Informations légales (page Mentions légales).
 export const legal = {
   status: 'Entrepreneur individuel (EI)',
-  // TODO : renseigner votre numéro SIREN (9 chiffres).
-  siren: '[SIREN À COMPLÉTER]',
-  // TODO : adresse de contact / de domiciliation professionnelle.
-  address: '[ADRESSE À COMPLÉTER], 13000 Marseille, France',
+  // À renseigner dès l'immatriculation (9 chiffres). Vide = « En cours d'immatriculation ».
+  siren: '',
+  // Adresse de domiciliation professionnelle. Vide = ville seule.
+  address: '',
+  city: 'Marseille (13), France',
   publicationDirector: 'Gaëtan Barbaria',
   host: {
     name: 'GitHub, Inc.',

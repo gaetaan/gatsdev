@@ -7,7 +7,7 @@ import { legal, site } from '../data/site';
 
 <BaseLayout
   title="Mentions légales"
-  description="Mentions légales et politique de données personnelles du site gatsdev.fr."
+  description="Mentions légales du site gatsdev.fr : éditeur, hébergement et données personnelles. Aucun cookie, aucun suivi d’audience."
 >
   <PageHeader title="Mentions légales">Dernière mise à jour le {legal.updatedAt}.</PageHeader>
 
@@ -23,11 +23,11 @@ import { legal, site } from '../data/site';
       </div>
       <div class="row">
         <dt class="row-label">SIREN</dt>
-        <dd class="row-body">{legal.siren}</dd>
+        <dd class="row-body">{legal.siren || 'En cours d’immatriculation'}</dd>
       </div>
       <div class="row">
         <dt class="row-label">Adresse</dt>
-        <dd class="row-body">{legal.address}</dd>
+        <dd class="row-body">{legal.address || legal.city}</dd>
       </div>
       <div class="row">
         <dt class="row-label">Email</dt>

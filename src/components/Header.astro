@@ -87,8 +87,17 @@ const icons: Record<string, string> = {
   .page-nav a:hover { color: var(--encre); }
   .nav-icon { display: none; }
 
-  /* Ordinateur : page active = couleur + soulignement épais (pas uniquement la couleur). */
+  /* Ordinateur : en-tête fixe en verre dépoli ; page active = couleur + soulignement épais. */
   @media (min-width: 40.0625rem) {
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      view-transition-name: site-header;
+      background: light-dark(rgb(251 252 253 / 0.82), rgb(15 26 42 / 0.82));
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      backdrop-filter: blur(16px) saturate(160%);
+    }
     .page-nav a[aria-current='page'] {
       color: var(--encre);
       text-decoration: underline;

@@ -24,6 +24,9 @@ npm run preview   # sert dist/ en local
 | Missions (page Expériences) | `src/data/experiences.ts` |
 | Compétences et formations (page Expertise) | `src/data/skills.ts` |
 | Textes des pages | `src/pages/*.astro` |
+| Briques communes (en-tête de page, rubrique, fin de page) | `src/components/PageHeader.astro`, `Section.astro`, `PageEnd.astro` |
+| Barre d'onglets mobile, en-tête | `src/components/Header.astro` |
+| Balayage et transitions entre pages | `src/components/PageTransitions.astro` (+ fin de `global.css`) |
 | Couleurs, typographie | `src/styles/global.css` (variables en haut du fichier) |
 | Image de partage (Open Graph) | `scripts/og-image.mjs` puis `npm run og` |
 
@@ -32,7 +35,7 @@ npm run preview   # sert dist/ en local
 - [ ] **PDF** : déposer `public/dossier-de-competences-gaetan-barbaria.pdf` et `public/cv-gaetan-barbaria.pdf`
       (version avec contact@gatsdev.fr, sans numéro personnel), puis passer `site.showDocuments` à `true`.
 - [x] **LinkedIn** dans `site.linkedin`.
-- [ ] **SIREN** et **adresse** dans `legal`.
+- [ ] **SIREN** et **adresse** dans `legal` (vides = « En cours d’immatriculation » / ville seule).
 - [x] **Missions** dans `src/data/experiences.ts`, compétences dans `src/data/skills.ts`.
 - [ ] Si vous passez sur Cloudflare Pages : mettre à jour `legal.host`.
 

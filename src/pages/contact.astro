@@ -3,15 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Section from '../components/Section.astro';
 import { site } from '../data/site';
+
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Mission freelance')}`;
 ---
 
 <BaseLayout
-  title="Contact"
+  title="Contact et disponibilité"
   description={`Contactez Gaëtan Barbaria, lead tech full stack Java / Angular freelance à Aix-Marseille, disponible en ${site.availability}.`}
 >
   <PageHeader title="Parlons de votre projet">
-    Décrivez-moi votre contexte en quelques lignes&#8239;: l’application, l’équipe, l’enjeu et le calendrier. Je vous
-    réponds personnellement.
+    Décrivez-moi votre contexte en quelques lignes&#8239;: l’application, l’équipe, l’enjeu et le calendrier.
   </PageHeader>
 
   <Section id="coordonnees" title="Coordonnées">
@@ -19,7 +20,13 @@ import { site } from '../data/site';
       <div class="row">
         <dt class="row-label">Email</dt>
         <dd class="row-body">
-          <a class="contact-main" href={`mailto:${site.email}`}>{site.email}</a>
+          <div class="email">
+            <a class="contact-main" href={mailto}>{site.email}</a>
+            <button type="button" class="copy" data-copy={site.email} hidden>
+              <span data-copy-label>Copier</span><span class="visually-hidden"> l’adresse email</span>
+            </button>
+          </div>
+          <p class="visually-hidden" aria-live="polite" data-copy-status></p>
         </dd>
       </div>
       <div class="row">
@@ -68,7 +75,42 @@ import { site } from '../data/site';
   </Section>
 </BaseLayout>
 
+<script is:inline>
+  (() => {
+    const btn = document.querySelector('[data-copy]');
+    if (!btn || !navigator.clipboard) return;
+    const label = btn.querySelector('[data-copy-label]');
+    const status = document.querySelector('[data-copy-status]');
+    btn.hidden = false;
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        label.textContent = 'Copié';
+        status.textContent = 'Adresse email copiée';
+        setTimeout(() => { label.textContent = 'Copier'; status.textContent = ''; }, 2000);
+      } catch (e) {}
+    });
+  })();
+</script>
+
 <style>
+  .email { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); }
+  .copy {
+    min-height: 2.75rem;
+    padding: 0.3rem 1rem;
+    font: inherit;
+    font-size: var(--t-small);
+    font-weight: 600;
+    color: var(--cobalt);
+    background: transparent;
+    border: 1px solid var(--filet);
+    border-radius: 999px;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .copy:hover { background: var(--cobalt-voile); border-color: var(--cobalt); }
+  .copy[hidden] { display: none; }
   .contact-main { font-size: 1.35rem; font-weight: 600; overflow-wrap: anywhere; }
   .docs { list-style: none; padding: 0; }
   .docs li { display: grid; }
