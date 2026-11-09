@@ -21,8 +21,8 @@ npm run preview   # sert dist/ en local
 | --- | --- |
 | Nom, email, LinkedIn, disponibilité, chemin du PDF | `src/data/site.ts` (`site`) |
 | SIREN, adresse, hébergeur (mentions légales) | `src/data/site.ts` (`legal`) |
-| Missions (page Expériences) | `src/data/experiences.ts` |
-| Compétences et formations (page Expertise) | `src/data/skills.ts` |
+| Missions (page Missions) | `src/data/experiences.ts` |
+| Compétences et formations (accueil) | `src/data/skills.ts` |
 | Textes des pages | `src/pages/*.astro` |
 | Briques communes (en-tête de page, rubrique, fin de page) | `src/components/PageHeader.astro`, `Section.astro`, `PageEnd.astro` |
 | Barre d'onglets mobile, en-tête | `src/components/Header.astro` |

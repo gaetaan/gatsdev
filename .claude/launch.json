@@ -4,8 +4,25 @@
     {
       "name": "gatsdev-preview",
       "runtimeExecutable": "/opt/homebrew/bin/node",
-      "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "preview", "--port", "4321"],
+      "runtimeArgs": [
+        "node_modules/astro/bin/astro.mjs",
+        "preview",
+        "--port",
+        "4321"
+      ],
       "port": 4321
+    },
+    {
+      "name": "gatsdev-preview-alt",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4322",
+        "--directory",
+        "dist"
+      ],
+      "port": 4322
     }
   ]
 }

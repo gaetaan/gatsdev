@@ -8,10 +8,10 @@ import PageEnd from '../components/PageEnd.astro';
 ---
 
 <BaseLayout
-  title="Expériences et missions"
+  title="Missions et expériences"
   description="Missions de Gaëtan Barbaria depuis 2020 : refontes vers des microservices DDD / hexagonaux, chat national, migration WebLogic vers Quarkus, encadrement d’équipes."
 >
-  <PageHeader title="Expériences">
+  <PageHeader title="Missions">
       Six missions depuis 2020, toutes sur des applications métier nationales, de développeur unique à leader technique
       d’une équipe de 8&nbsp;personnes.
       {
@@ -27,7 +27,7 @@ import PageEnd from '../components/PageEnd.astro';
       }
   </PageHeader>
 
-  <Section id="missions" title="Missions depuis 2020">
+  <Section id="missions" title="Depuis 2020">
   <ol class="rows timeline">
     {
       experiences.map((xp, i) => (
@@ -69,7 +69,7 @@ import PageEnd from '../components/PageEnd.astro';
     site.showDocuments ? (
       <PageEnd secondary={{ href: site.resumePdf, label: 'Dossier de compétences (PDF)' }} />
     ) : (
-      <PageEnd secondary={{ href: '/expertise/', label: 'Voir l’expertise' }} />
+      <PageEnd secondary={{ href: '/#competences', label: 'Voir les compétences' }} />
     )
   }
 </BaseLayout>

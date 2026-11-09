@@ -4,6 +4,7 @@ import Section from '../components/Section.astro';
 import PageEnd from '../components/PageEnd.astro';
 import { site } from '../data/site';
 import { experiences } from '../data/experiences';
+import { technical, training } from '../data/skills';
 
 const recent = experiences.slice(0, 2);
 const stack = ['Java 25', 'Quarkus 3', 'Angular 22', 'Kafka', 'Oracle', 'Kubernetes'];
@@ -11,15 +12,19 @@ const stack = ['Java 25', 'Quarkus 3', 'Angular 22', 'Kafka', 'Oracle', 'Kuberne
 const offers = [
   {
     title: 'Piloter une refonte',
-    text: 'Passer d’un monolithe ou d’une application instable à des microservices DDD / hexagonaux, sans interrompre le service : cadrage, architecture cible, découpage, mises en production.',
+    text: 'Passer d’un monolithe ou d’une application instable à des microservices DDD / hexagonaux, sans interrompre le service : cadrage, architecture cible, découpage, montées de version, mises en production.',
   },
   {
     title: 'Concevoir et livrer, back et front',
-    text: 'Java / Quarkus côté serveur, Angular côté interface, événementiel avec Kafka et Debezium. Avec ce qui va avec : performances Oracle, sécurité des API, accessibilité RGAA, supervision en production.',
+    text: 'Java / Quarkus côté serveur, Angular côté interface, événementiel avec Kafka et Debezium. Du code testé, revu et supervisé jusqu’en production.',
   },
   {
     title: 'Faire grandir l’équipe',
-    text: 'Encadrement d’équipes de 3 à 8 personnes, référent technique d’un plateau de 20 à 30 développeurs, Scrum Master : standards communs, revues de code, montée en autonomie.',
+    text: 'Encadrement d’équipes de 3 à 8 personnes, l’un des trois référents techniques d’un plateau de 20 à 30 développeurs, Scrum Master sur trois équipes : standards communs, revues de code, montée en autonomie.',
+  },
+  {
+    title: 'Fiabiliser l’existant',
+    text: 'Accessibilité RGAA, sécurisation des API (gateway, contrôle d’accès par propriétaire), performances sur forte volumétrie (plans d’exécution Oracle, Hibernate, batch).',
   },
 ];
 
@@ -68,9 +73,9 @@ const jsonLd = {
         <span translate="no">{stack.join(', ')}</span>
       </p>
       <p class="lede">
-        J’accompagne les équipes qui doivent faire évoluer une application métier critique. Depuis {site.yearsOfExperience}&nbsp;ans,
-        sur des applications utilisées dans toute la France, je conçois l’architecture, je code côté serveur comme côté
-        interface, et je fais monter l’équipe en autonomie.
+        Après {site.yearsOfExperience}&nbsp;ans à piloter des applications nationales chez Sopra Steria, je passe en
+        indépendant pour accompagner les équipes qui doivent faire évoluer une application métier critique : je conçois
+        l’architecture, je code côté serveur comme côté interface, et je fais monter l’équipe en autonomie.
       </p>
       <div class="actions">
         <a class="button" href="/contact/">Me contacter</a>
@@ -90,6 +95,19 @@ const jsonLd = {
         ))
       }
     </ul>
+  </Section>
+
+  <Section id="competences" title="Compétences">
+    <dl class="rows">
+      {
+        technical.map((g) => (
+          <div class="row">
+            <dt class="row-label">{g.label}</dt>
+            <dd class="row-body" translate="no">{g.items.join(', ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
   </Section>
 
   <Section id="missions" title="Missions récentes">
@@ -116,7 +134,20 @@ const jsonLd = {
     <p class="more"><a href="/experiences/">Toutes les missions depuis 2020</a></p>
   </Section>
 
-  <PageEnd secondary={{ href: '/expertise/', label: 'Voir l’expertise' }} />
+  <Section id="formation" title="Formations et langues">
+    <dl class="rows">
+      {
+        training.map((t) => (
+          <div class="row">
+            <dt class="row-label">{t.year}</dt>
+            <dd class="row-body">{t.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <PageEnd secondary={{ href: '/experiences/', label: 'Voir les missions' }} />
 </BaseLayout>
 
 <style>

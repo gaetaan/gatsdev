@@ -10,5 +10,9 @@ export default defineConfig({
     // Inline le CSS (petit) pour éviter une requête bloquante.
     inlineStylesheets: 'always',
   },
+  // Ancienne page fusionnée dans l'accueil : redirection pour les liens existants.
+  redirects: {
+    '/expertise': '/#competences',
+  },
   integrations: [sitemap()],
 });

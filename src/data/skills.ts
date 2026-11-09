@@ -1,4 +1,4 @@
-// Compétences affichées sur la page « Expertise ».
+// Compétences et formations affichées sur l'accueil.
 // Source : dossier de compétences (novembre 2026).
 
 export interface SkillGroup {
@@ -7,22 +7,17 @@ export interface SkillGroup {
 }
 
 export const technical: SkillGroup[] = [
-  { label: 'Langages', items: ['Java (8 → 25)', 'TypeScript', 'JavaScript', 'SQL', 'HTML / CSS'] },
+  { label: 'Back-end', items: ['Java 8 → 25', 'Quarkus 1 et 3', 'Hibernate / JPA', 'API REST', 'Maven'] },
+  { label: 'Front-end', items: ['Angular 8 → 22', 'TypeScript', 'RxJS', 'Web Components', 'Micro-frontends'] },
   {
-    label: 'Back-end',
-    items: ['Quarkus 1 et 3', 'Panache', 'Hibernate ORM / JPA', 'REST', 'Maven'],
+    label: 'Architecture et données',
+    items: ['DDD', 'Architecture hexagonale', 'Microservices', 'Kafka', 'Debezium', 'Oracle'],
   },
   {
-    label: 'Front-end',
-    items: ['Angular (8 → 22)', 'RxJS', 'Web Components', 'Micro-frontends (module federation)'],
+    label: 'Qualité et production',
+    items: ['JUnit', 'WireMock', 'Vitest', 'Cypress', 'Kubernetes', 'GitLab CI', 'Dynatrace', 'Kibana'],
   },
-  { label: 'Architecture', items: ['Domain-Driven Design', 'Architecture hexagonale', 'Microservices', 'API REST', 'Software craftsmanship'] },
-  { label: 'Événementiel', items: ['Kafka', 'Debezium (change data capture)', 'Matrix / Synapse'] },
-  { label: 'Données', items: ['Oracle', 'Optimisation de requêtes et de plans d’exécution', 'Traitements batch'] },
-  { label: 'Tests', items: ['JUnit', 'WireMock', 'Vitest', 'Jasmine / Karma', 'Spectator', 'Cypress'] },
-  { label: 'Livraison', items: ['Kubernetes', 'GitLab CI', 'Concourse', 'Jenkins', 'Git'] },
-  { label: 'Exploitation', items: ['Dynatrace', 'Kibana', 'AppDynamics'] },
-  { label: 'IA', items: ['GitHub Copilot', 'Claude', 'Intégration de l’IA dans le flux de développement et les rituels agiles'] },
+  { label: 'IA', items: ['GitHub Copilot', 'Claude, intégrés au développement et aux rituels agiles'] },
 ];
 
 export const training: { year: string; label: string }[] = [
@@ -30,5 +25,5 @@ export const training: { year: string; label: string }[] = [
   { year: '2024', label: 'Kubernetes' },
   { year: '2022', label: 'Angular avancé, Scrum Master' },
   { year: '2020', label: 'Master ILD, Aix-Marseille Université' },
-  { year: '2018', label: 'Licence informatique, Aix-Marseille Université' },
+  { year: 'Langues', label: 'Français (langue maternelle), anglais professionnel' },
 ];

@@ -42,7 +42,6 @@ export const legal = {
 
 export const nav = [
   { href: '/', label: 'Accueil' },
-  { href: '/expertise/', label: 'Expertise' },
-  { href: '/experiences/', label: 'Expériences' },
+  { href: '/experiences/', label: 'Missions' },
   { href: '/contact/', label: 'Contact' },
 ] as const;
