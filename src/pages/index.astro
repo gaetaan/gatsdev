@@ -77,7 +77,7 @@ const jsonLd = {
         loading="eager"
         fetchpriority="high"
       />
-      <p class="availability">Disponible en {site.availability}</p>
+      <p class="availability"><span>Disponible le <time datetime={site.availabilityIso}>{site.availability}</time></span></p>
       <h1 id="hero-title">{site.owner}</h1>
       <p class="hero-role">Lead tech full stack Java&nbsp;/&nbsp;Angular, freelance à&nbsp;Aix‑Marseille</p>
       <p class="hero-stack">

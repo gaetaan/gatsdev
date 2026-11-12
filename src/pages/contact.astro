@@ -9,7 +9,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Mission freel
 
 <BaseLayout
   title="Contact et disponibilité"
-  description={`Contactez Gaëtan Barbaria, lead tech full stack Java / Angular freelance à Aix-Marseille, disponible en ${site.availability}.`}
+  description={`Contactez Gaëtan Barbaria, lead tech full stack Java / Angular freelance à Aix-Marseille, disponible le ${site.availability}.`}
 >
   <PageHeader title="Parlons de votre projet">
     Décrivez-moi votre contexte en quelques lignes&#8239;: l’application, l’équipe, l’enjeu et le calendrier.
@@ -61,7 +61,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Mission freel
     <dl class="rows">
       <div class="row">
         <dt class="row-label">Disponibilité</dt>
-        <dd class="row-body"><span class="availability">À partir de {site.availability}</span></dd>
+        <dd class="row-body"><span class="availability"><span>À partir du <time datetime={site.availabilityIso}>{site.availability}</time></span></span></dd>
       </div>
       <div class="row">
         <dt class="row-label">Lieu</dt>

@@ -47,7 +47,7 @@ export const experiences: Experience[] = [
     company: 'Sopra Steria',
     client: 'France Travail',
     summary:
-      'Application nationale parmi les plus utilisées du SI, qui gère les échanges entre conseillers et usagers : plusieurs millions de lignes en base et environ un million de courriels traités par an.',
+      'Application nationale parmi les plus utilisées du SI, qui gère les échanges écrits entre conseillers et usagers, sur une forte volumétrie.',
     highlights: [
       'Pilotage de la refonte d’un monolithe vers des microservices DDD / hexagonaux.',
       'Chat instantané entre conseillers et demandeurs d’emploi, du POC au déploiement national.',

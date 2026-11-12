@@ -24,7 +24,7 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
     <text x="96" y="364" font-size="34" fill="${slate}">Lead tech full stack Java / Angular</text>
     <text x="96" y="410" font-size="34" fill="${slate}">Freelance, Aix-Marseille</text>
     <circle cx="106" cy="510" r="8" fill="#5cc27a"/>
-    <text x="126" y="520" font-size="28" fill="${paper}">Disponible en janvier 2027</text>
+    <text x="126" y="520" font-size="28" fill="${paper}">Disponible le 18 janvier 2027</text>
     <text x="96" y="572" font-size="26" fill="${cobalt}">gatsdev.fr</text>
   </g>
 </svg>`;
